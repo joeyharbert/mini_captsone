@@ -1,0 +1,1 @@
+json.message "We are in all_products"
