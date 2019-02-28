@@ -5,7 +5,12 @@ class Api::ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
+    if params[:id].to_i != 0
+      @product = Product.find(params[:id])
+    else
+      @product = Product.find_by(name: params[:id]) 
+    end
     render 'product.json.jbuilder'
   end
+
 end
