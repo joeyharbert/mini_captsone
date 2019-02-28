@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # end
   namespace :api do
     get "/" => "products#all_products"
-    get 'products/:id' => 'products#show'
+    get '/products' => 'products#show'
+    get '/products/:id' => 'products#show'
   end
 end
