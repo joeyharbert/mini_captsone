@@ -10,7 +10,7 @@ class Api::ProductsController < ApplicationController
     else
       @product = Product.find_by(name: params[:id]) 
     end
-    render 'product.json.jbuilder'
+    render 'show.json.jbuilder'
   end
 
 end
