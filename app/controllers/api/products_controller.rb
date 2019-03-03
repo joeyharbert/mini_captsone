@@ -13,4 +13,15 @@ class Api::ProductsController < ApplicationController
     render 'show.json.jbuilder'
   end
 
+  def create
+    @product = Product.new(
+      name: params[:name], 
+      price: params[:price].to_i, 
+      description: params[:description],
+      image_url: params[:image_url]
+      )
+    @product.save
+    render 'show.json.jbuilder'
+  end
+
 end
