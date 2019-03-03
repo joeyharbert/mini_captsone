@@ -35,4 +35,10 @@ class Api::ProductsController < ApplicationController
     render 'show.json.jbuilder'
   end
 
+  def destroy
+    @product = Product.find(params[:id])
+    @product.destroy
+    render 'destroy.json.jbuilder'
+  end
+
 end
