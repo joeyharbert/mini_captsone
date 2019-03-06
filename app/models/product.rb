@@ -5,10 +5,14 @@ class Product < ApplicationRecord
   end
 
   def tax
-    return price * 0.09
+    return (price * 0.09).round(2)
   end
 
   def total
-    return price + tax
+    return (price + tax).round(2)
+  end
+
+  def total_string  #total with trailing zeroes
+    return '%.2f' % total
   end
 end
