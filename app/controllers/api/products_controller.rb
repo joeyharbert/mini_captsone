@@ -24,7 +24,7 @@ class Api::ProductsController < ApplicationController
     if @product.save
       render 'show.json.jbuilder'  
     else
-      render 'errors.json.jbuilder'
+      render 'errors.json.jbuilder', status: :unprocessable_entity
     end
     
   end
@@ -41,7 +41,7 @@ class Api::ProductsController < ApplicationController
     if @product.update(updates)
       render 'show.json.jbuilder'  
     else
-      render 'errors.json.jbuilder'
+      render 'errors.json.jbuilder', status: :unprocessable_entity
     end
   end
 
