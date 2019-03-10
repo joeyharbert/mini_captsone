@@ -1,12 +1,17 @@
 class Api::ProductsController < ApplicationController
   def index
     search_term = params[:search]
-
-    if search_term
+    discount = params[:discount] == "true" ? true : false
+    if search_term && discount
+      @products = Product.where("name iLIKE ? AND price <= 2", "%#{search_term}%")
+    elsif search_term
       @products = Product.where("name iLIKE ?", "%#{search_term}%")
+    elsif discount
+      @products = Product.where("price < 2")
     else
       @products = Product.all
     end
+
 
     render 'index.json.jbuilder'
   end
