@@ -2,6 +2,7 @@ class Api::ProductsController < ApplicationController
   def index
     search_term = params[:search]
     discount = params[:discount] == "true" ? true : false
+    sort = params[:sort]
     if search_term && discount
       @products = Product.where("name iLIKE ? AND price <= 2", "%#{search_term}%")
     elsif search_term
@@ -10,6 +11,10 @@ class Api::ProductsController < ApplicationController
       @products = Product.where("price < 2")
     else
       @products = Product.all
+    end
+
+    if sort
+      @products.order!(:price)
     end
 
 
