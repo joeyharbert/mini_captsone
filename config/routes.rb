@@ -7,11 +7,13 @@ Rails.application.routes.draw do
   #   get "/photos" => "photos#index"
   # end
   namespace :api do
-    get '/products' => "products#index"
+    get '/products' => 'products#index'
     #get '/products' => 'products#show'
     get '/products/:id' => 'products#show'
     post '/products' => 'products#create'
     patch '/products/:id' => 'products#update'
     delete '/products/:id' => 'products#destroy'
+
+    get '/suppliers' => 'suppliers#index'
   end
 end
