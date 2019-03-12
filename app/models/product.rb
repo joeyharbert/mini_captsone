@@ -24,4 +24,13 @@ class Product < ApplicationRecord
   def supplier
     return Supplier.find(supplier_id)
   end
+
+  def images
+    image_array = Image.where(id: id)
+    url_array = []
+    image_array.each do |image|
+      url_array << image.url
+    end
+    return url_array
+  end
 end
