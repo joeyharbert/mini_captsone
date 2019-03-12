@@ -20,4 +20,8 @@ class Product < ApplicationRecord
   def total_string  #total with trailing zeroes
     return '%.2f' % total
   end
+
+  def supplier
+    return Supplier.find(supplier_id)
+  end
 end
