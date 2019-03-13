@@ -3,6 +3,7 @@ json.name product.name
 json.description product.description
 json.images product.images
 
+
 # json.pricing_info do
   json.discounted product.is_discounted?
   json.price product.price

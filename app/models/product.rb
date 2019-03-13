@@ -3,6 +3,9 @@ class Product < ApplicationRecord
   validates :price, presence: true, numericality: {greater_than: 0}
   validates :description, length: {in: 10..500}
 
+  belongs_to :supplier
+  has_many :images
+
 
   def is_discounted?
     return true if price < 10
@@ -21,16 +24,16 @@ class Product < ApplicationRecord
     return '%.2f' % total
   end
 
-  def supplier
-    return Supplier.find(supplier_id)
-  end
+  # def supplier
+  #   return Supplier.find(supplier_id)
+  # end
 
-  def images
-    image_array = Image.where(id: id)
-    url_array = []
-    image_array.each do |image|
-      url_array << image.url
-    end
-    return url_array
-  end
+  # def images
+  #   image_array = Image.where(id: id)
+  #   url_array = []
+  #   image_array.each do |image|
+  #     url_array << image.url
+  #   end
+  #   return url_array
+  # end
 end
