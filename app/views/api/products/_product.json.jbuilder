@@ -11,3 +11,5 @@ json.images product.images
   json.total product.total  
   json.visual_total product.total_string
 # end
+
+json.current_user current_user.name
