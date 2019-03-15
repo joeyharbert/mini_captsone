@@ -24,7 +24,7 @@ class Api::OrdersController < ApplicationController
         render json: {errors: order.errors.full_messages}, status: :bad_request
       end
     else
-      render json: []
+      render json: [], status: :unauthorized
     end
   end
 
@@ -33,7 +33,7 @@ class Api::OrdersController < ApplicationController
       @orders = Order.where(user_id: current_user.id)
       render 'index.json.jbuilder'
     else
-      render json: []
+      render json: [], status: :unauthorized
     end
   end
 
@@ -49,7 +49,7 @@ class Api::OrdersController < ApplicationController
       @order = Order.find(id)
       render 'show.json.jbuilder'
     else
-      render json: []
+      render json: [], status: :unauthorized
     end
   end
 end
