@@ -1,4 +1,5 @@
 class Api::ProductsController < ApplicationController
+  
   def index
     search_term = params[:search]
     discount = params[:discount] == "true" ? true : false

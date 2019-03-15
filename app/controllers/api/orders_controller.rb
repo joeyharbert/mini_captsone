@@ -5,7 +5,8 @@ class Api::OrdersController < ApplicationController
     if product
       price = product.price
       subtotal = price * params[:quantity].to_i
-      tax = subtotal * 0.10
+      tax_rate = 0.10
+      tax = subtotal * tax_rate
       total = subtotal + tax   
     end
 
@@ -31,6 +32,22 @@ class Api::OrdersController < ApplicationController
     if current_user
       @orders = Order.where(user_id: current_user.id)
       render 'index.json.jbuilder'
+    else
+      render json: []
+    end
+  end
+
+  def show
+    if current_user
+      sql = "SELECT id FROM orders
+            WHERE user_id = #{current_user.id}
+            ORDER BY created_at DESC
+            LIMIT 1;"
+      temp = ActiveRecord::Base.connection.execute(sql)[0]
+      id = temp["id"]
+
+      @order = Order.find(id)
+      render 'show.json.jbuilder'
     else
       render json: []
     end
