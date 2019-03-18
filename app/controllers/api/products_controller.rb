@@ -15,17 +15,20 @@ class Api::ProductsController < ApplicationController
       @products = Product.where("price < 2")
     end
 
+
+    if params[:category]
+      category = Category.find_by(name: params[:category])
+      @products = category.products
+    end
+
+    #sort is what we're sorting by (price, name)
+    #sort_order is asc or desc
     if sort && sort_order
       @products.order!(sort => sort_order)
     elsif sort
       @products.order!(sort)
     else
       @products.order!(:id)
-    end
-
-    if params[:category]
-      category = Category.find_by(name: params[:category])
-      @products = category.products
     end
 
     render 'index.json.jbuilder'
