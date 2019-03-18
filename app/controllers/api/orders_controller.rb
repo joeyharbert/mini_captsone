@@ -1,6 +1,8 @@
 class Api::OrdersController < ApplicationController
+  before_action :authenticate_user
+
   def create
-    if current_user
+
     product = Product.find(params[:product_id])
     if product
       price = product.price
@@ -23,33 +25,22 @@ class Api::OrdersController < ApplicationController
       else
         render json: {errors: order.errors.full_messages}, status: :bad_request
       end
-    else
-      render json: [], status: :unauthorized
-    end
   end
 
   def index
-    if current_user
-      @orders = Order.where(user_id: current_user.id)
-      render 'index.json.jbuilder'
-    else
-      render json: [], status: :unauthorized
-    end
+    @orders = Order.where(user_id: current_user.id)
+    render 'index.json.jbuilder'
   end
 
   def show
-    if current_user
-      sql = "SELECT id FROM orders
-            WHERE user_id = #{current_user.id}
-            ORDER BY created_at DESC
-            LIMIT 1;"
-      temp = ActiveRecord::Base.connection.execute(sql)[0]
-      id = temp["id"]
+    sql = "SELECT id FROM orders
+          WHERE user_id = #{current_user.id}
+          ORDER BY created_at DESC
+          LIMIT 1;"
+    temp = ActiveRecord::Base.connection.execute(sql)[0]
+    id = temp["id"]
 
-      @order = Order.find(id)
-      render 'show.json.jbuilder'
-    else
-      render json: [], status: :unauthorized
-    end
+    @order = Order.find(id)
+    render 'show.json.jbuilder'
   end
 end

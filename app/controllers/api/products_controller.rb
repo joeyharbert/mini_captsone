@@ -1,5 +1,5 @@
 class Api::ProductsController < ApplicationController
-  
+  before_action :authenticate_admin, except: [:index, :show]
   def index
     search_term = params[:search]
     discount = params[:discount] == "true" ? true : false
@@ -23,6 +23,10 @@ class Api::ProductsController < ApplicationController
       @products.order!(:id)
     end
 
+    if params[:category]
+      category = Category.find_by(name: params[:category])
+      @products = category.products
+    end
 
     render 'index.json.jbuilder'
   end
