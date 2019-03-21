@@ -28,4 +28,16 @@ class Api::CartedProductsController < ApplicationController
       render json: [], status: :unprocessable_entity
     end
   end
+
+  def destroy
+    if current_user
+      carted_product = Cartedproduct.where(user_id: current_user.id)
+      carted_product = Cartedproduct.where(id: params[:id])
+      carted_product = Cartedproduct.where(status: "carted")
+      carted_product.update(status: "removed")
+      render json: "Product removed from cart"
+    else
+      render json: [], status: :unprocessable_entity
+    end
+  end
 end
