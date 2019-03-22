@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>All Products</title>
+</head>
+<body>
+  <h1>All Products</h1>
+
+  <% @products.each do |product|%>
+    <p>id: <%= product.id %></p>
+    <p>name: <%= product.name%></p>
+    <p>description: <%= product.description%></p>
+    <p>
+      <% product.images.each do |image| %>
+        <img src= "<%=image.url%>">  
+      <% end %>
+    </p>
+    <p>Discounted? <%= product.is_discounted?%></p>
+    <p>Price: <%= product.price%></p>
+    <p>Tax: <%= product.tax%></p>
+    <p>Total: <%= product.total  %></p>
+    <p>
+      Categories:
+      <ul>
+      <% product.categories.each do |category|%>
+        <%= category.name %>  
+      <% end %>
+      </ul>
+    </p>
+    <h6><a href="http://localhost:3000/products/<%=product.id%>">show product</a></h6>
+  <% end %>
+</body>
+</html>

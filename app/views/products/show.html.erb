@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Show</title>
+</head>
+<body>
+  <h2><p>name: <%= @product.name%></p></h2>
+  <h5><a href="http://localhost:3000/products">Show All Products</a></h5>
+  <p>id: <%= @product.id %></p>
+  <p>description: <%= @product.description%></p>
+  <p>
+    <% @product.images.each do |image| %>
+      <img src= "<%=image.url%>">  
+    <% end %>
+  </p>
+  <p>Discounted? <%= @product.is_discounted?%></p>
+  <p>Price: <%= @product.price%></p>
+  <p>Tax: <%= @product.tax%></p>
+  <p>Total: <%= @product.total  %></p>
+  <p>
+    Categories:
+    <ul>
+    <% @product.categories.each do |category|%>
+      <%= category.name %>  
+    <% end %>
+    </ul>
+  </p>
+</body>
+</html>
