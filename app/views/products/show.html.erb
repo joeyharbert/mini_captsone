@@ -10,6 +10,7 @@
 <p>Price: <%= @product.price%></p>
 <p>Tax: <%= @product.tax%></p>
 <p>Total: <%= @product.total  %></p>
+<p>Supplier: <%= @product.supplier.name  %></p>
 <p>
   Categories:
   <ul>
@@ -18,3 +19,5 @@
   <% end %>
   </ul>
 </p>
+
+<p><a href="/products/<%=@product.id%>" data-method="delete" rel="nofollow">Delete Product</a></p>
